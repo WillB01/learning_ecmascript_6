@@ -1,0 +1,8 @@
+section > div{
+    height: 100px;
+    width: 100px;
+    background: #333;
+    float: left;
+    margin: 3px;
+    cursor: pointer;
+}

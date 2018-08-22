@@ -1,0 +1,22 @@
+{
+  "name": "testing-webpack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WillB01/learning_ecmascript_6.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WillB01/learning_ecmascript_6/issues"
+  },
+  "homepage": "https://github.com/WillB01/learning_ecmascript_6#readme",
+  "devDependencies": {
+    "babel-loader": "^7.1.5"
+  }
+}
