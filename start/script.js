@@ -316,3 +316,110 @@ spacePeople().then(
 );
 
 //Loading data with fetch
+// fetch('http://api.open-notify.org/astros.json')
+//     .then(res => res.json())
+//     .then(console.log());
+
+//     const getPeopleInSpace = () => {
+//         fetch('http://api.open-notify.org/astros.json').then(res => res.json()); 
+//     };
+// const spaceNames = () => {
+//     getPeopleInSpace().then(json => json.people)
+//         .then(people => people.map(p => p.name))
+//         .then(names => names.join(", "));
+// }
+
+//     spaceNames().then(console.log);
+
+//Async and await
+const DELAYAsync = (seconds) => {
+    return new Promise(
+        resolve => setTimeout(resolve, seconds * 1000)
+    );
+};
+
+const countToFive = async () => {
+    console.log('zero seconds');
+    await DELAYAsync(1);
+    console.log("one second");
+    await DELAYAsync(1);
+    console.log("Two seconds");
+    await DELAYAsync(3);
+    console.log("five seconds");
+};
+countToFive();
+
+//Async with fetch
+
+const githubRequest = async(loginName) => {
+    try{
+        let response = await fetch(`https://api.github.com/users/${loginName}/followers`);
+        let json = await response.json();
+        let followerList= json.map(user => user.login);
+        console.log(followerList); 
+    }catch(e){
+        console.log("data didn't load", e);
+    }
+};
+
+githubRequest("WillB01");
+
+//ES6 classes
+
+class Vehicle {
+    constructor(description, wheels){
+        this.description = description;
+        this.wheels = wheels;
+    }
+
+    describeYourself(){
+        console.log(`i am a ${this.description} with ${this.wheels} wheels`);
+    }
+}
+
+let coolSkiVan = new Vehicle("cool ski van", 4);
+
+coolSkiVan.describeYourself();
+
+class SemiTruck extends Vehicle {
+    constructor(){
+        super("semi truck", 18);
+    }
+}
+
+let groceryStoreSemi = new SemiTruck();
+groceryStoreSemi.describeYourself();
+
+//Getter and setter
+let attendance = {
+    _list: [],
+    set addName(name){
+        this._list.push(name);
+    },
+    get list() {
+        return this._list.join(', ');
+    }
+};
+attendance.addName = "willy";
+console.log(attendance.list + " attendance list")
+console.log(attendance._list + " " + "attendance _list");
+
+attendance.addName = "Anna";
+console.log(attendance.list);
+
+console.log("------------CLASSES------------");
+
+class Hike {
+    constructor(distance, pace){
+        this.distance = distance;
+        this.pace = pace;
+    }get lenthInHours(){
+        return `${this.calcLength()} hours`;
+    }
+    calcLength(){
+        return this.distance / this.pace;
+    }
+}
+
+const mt = new Hike(10,2);
+console.log(mt.lenthInHours);
