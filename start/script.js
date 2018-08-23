@@ -163,6 +163,66 @@ personArrow.printActions()
 //Destructing assignment
 
 let [first,,,fourth,] = ["boston","new york","LA", "portland","Hartford"];
+let {title,price} = {
+    title:"Reuben",
+    price: 67,
+    description: "Cleavlands fav sandwich",
+    ingredients: ["beard","beef","cheese"]
+};
+
+let vacation = {
+    destination : "Chile",
+    travelers: 2,
+    activity : "skiing",
+    cost : 4000
+
+};
+
+function vacationMarketing({destination,activity}){
+    return `come to ${destination} and do som ${activity}`;
+}
+
+console.log(vacationMarketing(vacation));
 
 console.log(first);
 console.log(fourth);
+
+console.log(price);
+
+//Generator
+function* director(){
+    yield "three";
+    yield "two";
+    yield "one";
+    yield "Action";
+};
+
+let action = director();
+
+console.log(action.next().value);
+console.log(action.next());
+console.log(action.next());
+console.log(action.next());
+console.log(action.next());
+
+function* eachItem(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        yield arr[i]; 
+        
+    };
+};
+
+let letters = eachItem(["a","b","c","d","e","f","g"]);
+
+let abcs = setInterval(function(){
+    let letter = letters.next();
+    if(letter.done){
+        clearInterval(abcs);
+        console.log("now i know my abc");
+    }else{
+        let div = document.createElement('div');
+        document.getElementsByTagName('section')[1].appendChild(div).innerHTML = letter.value;
+
+    }
+},500);
+
