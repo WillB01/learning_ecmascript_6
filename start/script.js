@@ -226,3 +226,93 @@ let abcs = setInterval(function(){
     }
 },500);
 
+//Symbols
+
+const id = Symbol();
+const courseInfo = {
+    title: "ES6",
+    topics : ["babel","functions","classes"],
+    id : "js-course"
+};
+
+courseInfo[id] = 412;
+console.log(courseInfo);
+
+//Iterators
+
+let titleTwo = "ES6";
+
+let iterateIt = titleTwo[Symbol.iterator]();
+console.log(iterateIt.next());
+console.log(iterateIt.next());
+console.log(iterateIt.next());
+console.log(iterateIt.next());
+console.log(iterateIt.next());
+
+function tableReady(arr) {
+    let nextIndex = 0;
+    return{
+        next(){
+            if(nextIndex < arr.length){
+                return {value: arr.shift(), done: false}
+            }else{
+                return{done: true};
+            };
+        }
+    };
+  };
+
+  let waitingList = ["Sarah","Heater","Bengt"];
+  let iterateList = tableReady(waitingList);
+  console.log(`${iterateList.next().value}, your table is ready`);
+  console.log(`${iterateList.next().value}, your table is ready`);
+  console.log(`${iterateList.next().value}, your table is ready`);
+  console.log(`${iterateList.next().value}, your table is ready`);
+  console.log(`${iterateList.next().value}, your table is ready`);
+  console.log(`Is it finished? ${iterateList.next().done}`);
+
+
+//ASYNCHRONOUS FEATURES
+
+//Intro to promises
+const DELAY = (seconds) => {
+    return new Promise((resolve, reject) => {
+        if(typeof seconds !== "number"){
+            reject(new Error("Argument seconds must be a number"));
+        }
+        setTimeout(
+            () => resolve(`${seconds} second delay is up`),
+             seconds * 1000);
+    });
+};
+
+console.log("zero seconds");
+DELAY(1)
+.then((msg) => msg.toUpperCase())
+.then(msg => `${msg}!!!!!`)
+.then(msg => console.log(msg));
+
+DELAY(3).then((msg) => console.log(msg));
+
+//Building promises
+const spacePeople = () => {
+    return new Promise((resolves, rejects) => {
+        const api = 'http://api.open-notify.org/astros.json';
+        const request = new XMLHttpRequest();
+        request.open('GET',api);
+        request.onload = () => {
+            request.status === 200 ? resolves(JSON.parse(request.response)) : rejects(Error(request.statusText));
+        };
+        request.onerror = err => rejects(err);
+        request.send();
+    });
+};
+
+spacePeople().then(
+    spaceData => console.log(spaceData),
+    err => console.error(
+        new Error("Cannot load space people")
+    )
+);
+
+//Loading data with fetch
